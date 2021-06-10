@@ -16,24 +16,46 @@
   */
 
 //Setting up what encoder rotation does. If your encoder can be pressed as a button, that function can be set in Via.
+#include "definitions.h"
 
 #ifdef ENCODER_ENABLE
 
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) {
+enum ENCODERS {
+    LEFT,
+    RIGHT
+};
+
+void left_encoder_update_user(bool clockwise) {
+    if (IS_LAYER_ON(RAISE)) {
+        if (clockwise) {
+            tap_code(KC_MEDIA_NEXT_TRACK);
+        } else {
+            tap_code(KC_MEDIA_PREV_TRACK);
+        }
+    } else {
         if (clockwise) {
             tap_code(KC_VOLU);
         } else {
             tap_code(KC_VOLD);
         }
-    } else if (index == 1) {
-        clockwise = !clockwise;
-        if (clockwise) {
-            tap_code(KC_DOWN);
-        } else {
-            tap_code(KC_UP);
-        }
     }
+}
+
+void right_encoder_update_user(bool clockwise) {
+    if (clockwise) {
+        tap_code(KC_DOWN);
+    } else {
+        tap_code(KC_UP);
+    }
+}
+
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (index == LEFT) {
+        left_encoder_update_user(clockwise);
+    } else if (index == RIGHT) {
+        right_encoder_update_user(!clockwise); // not sure why it seems like this is reversed for right side encoder
+    }
+
     return true;
 }
 

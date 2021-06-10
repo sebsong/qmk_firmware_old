@@ -16,16 +16,11 @@
   */
 
 #include QMK_KEYBOARD_H
+#include "definitions.h"
 #include "oled.c"
 #include "encoder.c"
 
 #define TAP_DELAY 150
-
-enum LAYERS {
-    DEFAULT,
-    LOWER,
-    RAISE
-};
 
 enum CUSTOM_KEY_CODES {
     PREV_TAB = SAFE_RANGE,
