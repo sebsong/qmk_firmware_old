@@ -96,17 +96,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 };
 
+bool key_pressed;
+
 void mod_tap(uint16_t mod, uint16_t tap, keyrecord_t *record, bool shift_tap) {
     static uint16_t start;
     if (record->event.pressed) {
         start = timer_read();
+        key_pressed = false;
         register_code(mod);
     } else {
         if (!shift_tap) {
             unregister_code(mod);
         }
 
-        if (timer_elapsed(start) < TAP_DELAY) {
+        if (!key_pressed && timer_elapsed(start) < TAP_DELAY) {
             tap_code(tap);
         }
 
@@ -154,6 +157,10 @@ bool process_record_user_raise(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        key_pressed = true;
+    }
+
     if (IS_LAYER_ON(DEFAULT)) {
         return process_record_user_default(keycode, record);
     } else if (IS_LAYER_ON(LOWER)) {
