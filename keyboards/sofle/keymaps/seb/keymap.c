@@ -22,11 +22,8 @@
 
 #define TAP_DELAY 150
 
-enum CUSTOM_KEY_CODES {
-    PREV_TAB = SAFE_RANGE,
-    NEXT_TAB
-};
-
+#define KC_PRV_TAB LCMD(LSFT(KC_LBRACKET))
+#define KC_NXT_TAB LCMD(LSFT(KC_RBRACKET))
 
 //Default keymap. This can be changed in Via. Use oled.c and encoder.c to change beavior that Via cannot change.
 
@@ -92,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [RAISE] = LAYOUT(
   _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                        KC_PGUP, PREV_TAB, KC_UP, NEXT_TAB,_______, KC_BSPC,
+  _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRV_TAB, KC_UP, KC_NXT_TAB,_______, KC_BSPC,
   _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, KC_CAPS,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
   _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  XXXXXXX, _______, XXXXXXX, _______,   XXXXXXX, _______,
                          _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
@@ -150,28 +147,6 @@ bool process_record_user_raise(uint16_t keycode, keyrecord_t *record) {
             break;
         case KC_RSHIFT:
             mod_tap(keycode, KC_RBRACKET, record, false);
-            break;
-        case PREV_TAB:
-            if (record->event.pressed) {
-                register_code(KC_LCMD);
-                register_code(KC_LSHIFT);
-                register_code(KC_LBRACKET);
-            } else {
-                unregister_code(KC_LBRACKET);
-                unregister_code(KC_LSHIFT);
-                unregister_code(KC_LCMD);
-            }
-            break;
-        case NEXT_TAB:
-            if (record->event.pressed) {
-                register_code(KC_LCMD);
-                register_code(KC_LSHIFT);
-                register_code(KC_RBRACKET);
-            } else {
-                unregister_code(KC_RBRACKET);
-                unregister_code(KC_LSHIFT);
-                unregister_code(KC_LCMD);
-            }
             break;
     }
 
