@@ -43,9 +43,9 @@ void left_encoder_update_user(bool clockwise) {
 
 void right_encoder_update_user(bool clockwise) {
     if (clockwise) {
-        tap_code(KC_DOWN);
+        rgblight_step();
     } else {
-        tap_code(KC_UP);
+        rgblight_step_reverse();
     }
 }
 
