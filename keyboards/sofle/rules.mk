@@ -1,4 +1,4 @@
 MCU = atmega32u4
-BOOTLOADER = caterina
+BOOTLOADER = lufa-dfu
 SPLIT_KEYBOARD = yes
-DEFAULT_FOLDER = sofle/rev1
+DEFAULT_FOLDER = sofle/rev2

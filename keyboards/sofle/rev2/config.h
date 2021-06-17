@@ -21,7 +21,7 @@
 #define MATRIX_COL_PINS_RIGHT { F6, F7, B1, B3, B2, B6 }
 #define DIODE_DIRECTION COL2ROW
 
-#define TAPPING_TERM 100
+#define TAPPING_TERM 50
 #define DEBOUNCE 5
 
 /* encoder support */
@@ -29,7 +29,7 @@
 #define ENCODERS_PAD_B { F4 }
 #define ENCODERS_PAD_A_RIGHT { F4 }
 #define ENCODERS_PAD_B_RIGHT { F5 }
-#define ENCODER_RESOLUTION 2
+#define ENCODER_RESOLUTION 4
 
 #define TAP_CODE_DELAY 10
 
