@@ -30,8 +30,21 @@ for more options.
 #define RGB_DI_PIN D3
 #define RGBLED_NUM 74
 #define RGBLED_SPLIT {37,37}
-#define RGBLIGHT_ANIMATIONS
+// #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_LIMIT_VAL 100
 
 #define RGBLIGHT_DEFAULT_HUE 180
-#define RGBLIGHT_EFFECT_BREATHING
+#define RGBLIGHT_EFFECT_TWINKLE
+
+// disable features to try to save some space
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
+#define NO_ACTION_ONESHOT
+// #define NO_ACTION_TAPPING
+
+#ifndef NO_DEBUG
+#define NO_DEBUG
+#endif // !NO_DEBUG
+#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+#define NO_PRINT
+#endif // !NO_PRINT
