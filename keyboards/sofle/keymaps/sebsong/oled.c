@@ -20,8 +20,10 @@
 #include "definitions.h"
 
 #ifdef OLED_DRIVER_ENABLE
-#    define ANIM_SIZE 636  // number of bytes in array, minimize for adequate firmware size, max is 1024
-#    define TAP_FRAMES 2
+#define ANIM_SIZE 636  // number of bytes in array, minimize for adequate firmware size, max is 1024
+#define TAP_FRAMES 2
+#define FRAME_DELAY_SLOW 1000
+#define FRAME_DELAY_FAST 100
 
 // bongo cat
 static const char PROGMEM tap[TAP_FRAMES][ANIM_SIZE]   = {
@@ -49,10 +51,16 @@ static const char PROGMEM tap_reverse[TAP_FRAMES][ANIM_SIZE]   = {
 
 uint16_t last_time;
 int current_tap_frame = 0;
-int frame_rate = 1000;
 
 static void render_bongo_cat(bool reverse) {
-    if (timer_elapsed(last_time) > frame_rate) {
+    int frame_delay;
+    if (rgblight_is_enabled()) {
+        frame_delay = FRAME_DELAY_FAST;
+    } else {
+        frame_delay = FRAME_DELAY_SLOW;
+    }
+
+    if (timer_elapsed(last_time) > frame_delay) {
         current_tap_frame++;
         current_tap_frame %= TAP_FRAMES;
         last_time = timer_read();
