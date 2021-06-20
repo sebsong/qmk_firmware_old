@@ -29,7 +29,7 @@
 #include "stdint.h"
 #include "stdbool.h"
 
-#define TAP_DELAY 150
+#define TAP_DELAY 200
 
 #define KC_PRV_TAB LCMD(LSFT(KC_LBRACKET))
 #define KC_NXT_TAB LCMD(LSFT(KC_RBRACKET))

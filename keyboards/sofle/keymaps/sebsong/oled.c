@@ -39,10 +39,10 @@ static void render_bongo_cat_idle(bool reverse) {
         last_idle_frame_time = timer_read();
     }
 
-    if (reverse) {
+    if (!reverse) {
         oled_write_raw_P(idle[current_idle_frame], ANIM_SIZE);
     } else {
-        oled_write_raw_P(idle[current_idle_frame], ANIM_SIZE);
+        oled_write_raw_P(idle_reverse[current_idle_frame], ANIM_SIZE);
     }
 }
 
@@ -60,10 +60,10 @@ static void render_bongo_cat_tap(bool reverse) {
         last_tap_frame_time = timer_read();
     }
 
-    if (reverse) {
-        oled_write_raw_P(tap_reverse[current_tap_frame], ANIM_SIZE);
-    } else {
+    if (!reverse) {
         oled_write_raw_P(tap[current_tap_frame], ANIM_SIZE);
+    } else {
+        oled_write_raw_P(tap_reverse[current_tap_frame], ANIM_SIZE);
     }
 }
 
@@ -110,14 +110,17 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 void oled_task_user(void) {
+    bool reverse;
     if (is_keyboard_master()) {
-        render_bongo_cat_tap(false);
+        reverse = false;
     } else {
-        if (!rgblight_is_enabled()) {
-            render_bongo_cat_idle(true);
-        } else {
-            render_bongo_cat_tap(true);
-        }
+        reverse = true;
+    }
+
+    if (!rgblight_is_enabled()) {
+        render_bongo_cat_idle(reverse);
+    } else {
+        render_bongo_cat_tap(reverse);
     }
 }
 
