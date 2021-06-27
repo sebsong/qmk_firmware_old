@@ -24,7 +24,16 @@ for more options.
 
 #define EE_HANDS
 
-#define USB_MAX_POWER_CONSUMPTION 350
+// #define USB_MAX_POWER_CONSUMPTION 350
+
+#define USB_POLLING_INTERVAL_MS 1
+
+// mouse
+#define MK_KINETIC_SPEED
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_DELAY 0
+#define MOUSEKEY_MOVE_DELTA 0.5
+#define MOUSEKEY_MAX_SPEED 30
 
 //Add RGB underglow
 #define RGB_DI_PIN D3
