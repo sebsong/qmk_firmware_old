@@ -28,18 +28,17 @@ for more options.
 
 #define USB_POLLING_INTERVAL_MS 1
 
-// mouse
+// MOUSE
 #define MK_KINETIC_SPEED
 #define MOUSEKEY_INTERVAL 16
 #define MOUSEKEY_DELAY 0
 #define MOUSEKEY_MOVE_DELTA 0.5
 #define MOUSEKEY_MAX_SPEED 30
 
-//Add RGB underglow
+// RGB
 #define RGB_DI_PIN D3
 #define RGBLED_NUM 74
 #define RGBLED_SPLIT {37,37}
-// #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_LIMIT_VAL 150
 
 #define RGBLIGHT_DEFAULT_HUE 180
