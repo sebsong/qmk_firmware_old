@@ -26,7 +26,7 @@ enum ENCODERS {
 };
 
 void left_encoder_update_user(bool clockwise) {
-    if (IS_LAYER_ON(RAISE)) {
+    if (IS_LAYER_ON(RSE)) {
         if (clockwise) {
             tap_code(KC_MEDIA_NEXT_TRACK);
         } else {

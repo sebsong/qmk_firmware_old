@@ -3,8 +3,8 @@
 
 enum LAYERS {
     DEFAULT,
-    LOWER,
-    RAISE
+    LWR,
+    RSE
 };
 
 #endif
