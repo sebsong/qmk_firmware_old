@@ -34,6 +34,14 @@
 #define KC_PTAB LCMD(LSFT(KC_LBRACKET))
 #define KC_NTAB LCMD(LSFT(KC_RBRACKET))
 
+#define KC_WIN_PTAB LSFT(LCTRL(KC_TAB))
+#define KC_WIN_NTAB LCTRL(KC_TAB)
+
+enum custom_keycodes {
+    KC_MAC,
+    KC_WIN
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * QWERTY
@@ -50,13 +58,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            |      |      |      |      |/       /         \      \|      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
-
 [DEFAULT] = LAYOUT(
   KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSLS,
   KC_ESC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,    RGB_TOG,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
                     KC_LCTL, KC_LALT, KC_LCMD, KC_BSPC,MO(LWR),MO(RSE), KC_SPC, KC_ENT, KC_RALT,  KC_RCTL
+),
+[DEFAULT_WIN] = LAYOUT(
+  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSLS,
+  KC_ESC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,    RGB_TOG,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+                KC_LCTL, KC_LALT, KC_LCMD, KC_BSPC,MO(LWR_WIN),MO(RSE_WIN), KC_SPC, KC_ENT, KC_RALT,  KC_RCTL
 ),
 
 /* LOWER
@@ -80,6 +94,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,     _______, XXXXXXX,    KC_1,    KC_2,    KC_3, XXXXXXX, _______,
                     _______, _______, _______, _______,  _______,   _______,  _______,    KC_0,    KC_0, _______
 ),
+[LWR_WIN] = LAYOUT(
+  XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, KC_EQL,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX,    KC_7,    KC_8,    KC_9,  KC_F11, KC_F12,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX,    KC_4,    KC_5,    KC_6, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,     _______, XXXXXXX,    KC_1,    KC_2,    KC_3, XXXXXXX, _______,
+                    _______, _______, _______, _______,  _______,   _______,  _______,    KC_0,    KC_0, _______
+),
+
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
@@ -95,7 +117,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [RSE] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  KC_WIN,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, KC_PTAB,   KC_UP, KC_NTAB, XXXXXXX,                          KC_WH_U, KC_BTN1, KC_MS_U, KC_BTN2, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                          KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,        _______, XXXXXXX, KC_WH_L, KC_WH_R, XXXXXXX, XXXXXXX, _______,
+                    _______, _______, _______, _______,   _______,     _______,  _______, _______, _______, _______
+),
+[RSE_WIN] = LAYOUT(
+  KC_MAC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, KC_PTAB,   KC_UP, KC_NTAB, XXXXXXX,                          KC_WH_U, KC_BTN1, KC_MS_U, KC_BTN2, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                          KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,        _______, XXXXXXX, KC_WH_L, KC_WH_R, XXXXXXX, XXXXXXX, _______,
@@ -168,7 +197,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         key_pressed = true;
     }
 
-    if (IS_LAYER_ON(DEFAULT)) {
+    // handle mod tap
+    if (IS_LAYER_ON(DEFAULT) || IS_LAYER_ON(DEFAULT_WIN)) {
         return process_record_user_default(keycode, record);
     } else if (IS_LAYER_ON(LWR)) {
         return process_record_user_lower(keycode, record);
@@ -176,5 +206,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return process_record_user_raise(keycode, record);
     }
 
+    // handle layer switching
+    switch (keycode) {
+        case KC_MAC:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(DEFAULT);
+            }
+            return false;
+        case KC_WIN:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(DEFAULT_WIN);
+            }
+            return false;
+    }
+
     return true;
+}
+
+void oled_task_user(void) {
+    if (is_keyboard_master()) {
+        print_status_narrow();
+    }
+}
+
+static void print_status_narrow(void) {
+    // Print current mode
+    oled_write_P(PSTR("\n\n"), false);
+    oled_write_ln_P(PSTR("MODE"), false);
+    oled_write_ln_P(PSTR(""), false);
+
+    switch (get_highest_layer(default_layer_state)) {
+        case MAC:
+            oled_write_ln_P(PSTR("MAC"), false);
+            break;
+        case WIN:
+            oled_write_ln_P(PSTR("WIN"), false);
+            break;
+        default:
+            oled_write_P(PSTR("Undef"), false);
+    }
+    oled_write_P(PSTR("\n\n"), false);
 }
